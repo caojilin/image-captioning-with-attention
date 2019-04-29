@@ -1,1 +1,0 @@
-# image_caption_v2
