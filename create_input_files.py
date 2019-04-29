@@ -4,7 +4,7 @@ if __name__ == '__main__':
     # Create input files (along with word map)
     create_input_files(dataset='coco',
                        karpathy_json_path='../data/andrej_split/dataset_coco.json',
-                       image_folder='../data/attention',
+                       image_folder='../data',
                        captions_per_image=5,
                        min_word_freq=5,
                        output_folder='../data/attention',
