@@ -10,7 +10,8 @@ import argparse
 from scipy.misc import imread, imresize
 from PIL import Image
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 
 
 def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=3):
@@ -40,7 +41,7 @@ def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
     transform = transforms.Compose([normalize])
-    image = transform(img.to(device))  # (3, 256, 256)
+    image = transform()  # (3, 256, 256)
 
     # Encode
     image = image.unsqueeze(0)  # (1, 3, 256, 256)
