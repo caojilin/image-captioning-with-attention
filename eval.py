@@ -5,6 +5,7 @@ import torchvision.transforms as transforms
 from datasets import *
 from utils import *
 from nltk.translate.bleu_score import corpus_bleu
+from nltk.translate.meteor_score import meteor_score
 import torch.nn.functional as F
 from tqdm import tqdm
 
@@ -171,6 +172,12 @@ def evaluate(beam_size):
     # Calculate BLEU-4 scores
     bleu4 = corpus_bleu(references, hypotheses)
 
+    # Calculate BLEU-5 scores
+    # weights = (1./5., 1./5., 1./5., 1./5., 1./5.)
+    # bleu5 = corpus_bleu(list_of_references, hypotheses, weights)
+
+    meteor = round(meteor_score([reference1, reference2, reference3], hypothesis1),4)
+    print("meteor: ", meteor)
     return bleu4
 
 
