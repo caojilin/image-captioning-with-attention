@@ -8,6 +8,7 @@ from nltk.translate.bleu_score import corpus_bleu
 from nltk.translate.meteor_score import meteor_score
 import torch.nn.functional as F
 from tqdm import tqdm
+import pickle
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -187,7 +188,13 @@ def evaluate(beam_size):
     # weights = (1./5., 1./5., 1./5., 1./5., 1./5.)
     # bleu5 = corpus_bleu(list_of_references, hypotheses, weights)
 
-    meteor = round(meteor_score([reference1, reference2, reference3], hypothesis1),4)
+    with open('references.pickle', 'wb') as handle:
+        pickle.dump(references, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    with open('hypotheses.pickle', 'wb') as handle:
+        pickle.dump(hypotheses, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    meteor = round(meteor_score(references, hypotheses),4)
     print("meteor: ", meteor)
     return bleu4
 
