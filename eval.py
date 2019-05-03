@@ -188,17 +188,27 @@ def evaluate(beam_size):
     # weights = (1./5., 1./5., 1./5., 1./5., 1./5.)
     # bleu5 = corpus_bleu(list_of_references, hypotheses, weights)
 
-    with open('references.pickle', 'wb') as handle:
-        pickle.dump(references, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    with open('references.pickle', 'wb') as f1:
+        pickle.dump(references, f1, protocol=pickle.HIGHEST_PROTOCOL)
 
-    with open('hypotheses.pickle', 'wb') as handle:
-        pickle.dump(hypotheses, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    with open('hypotheses.pickle', 'wb') as f2:
+        pickle.dump(hypotheses, f2, protocol=pickle.HIGHEST_PROTOCOL)
 
-    meteor = round(meteor_score(references, hypotheses),4)
-    print("meteor: ", meteor)
+
+    # meteor = round(meteor_score(references, hypotheses),4)
+    # print("meteor: ", meteor)
     return bleu4
 
 
 if __name__ == '__main__':
     beam_size = 2
+    with open('references.pickle', 'rb') as f1:
+        references = pickle.load(f1)
+
+    with open('hypotheses.pickle', 'rb') as f2:
+        hypotheses = pickle.load(f2)
+
+    bleu4 = corpus_bleu(references, hypotheses)
+    print("BLEU-4: ", bleu4)
+    
     print("\nBLEU-4 score @ beam size of %d is %.4f." % (beam_size, evaluate(beam_size)))
