@@ -210,5 +210,8 @@ if __name__ == '__main__':
 
     bleu4 = corpus_bleu(references, hypotheses)
     print("BLEU-4: ", bleu4)
+
+    meteor = round(meteor_score(references, hypotheses),4)
+    print("meteor: ", meteor)
     
     print("\nBLEU-4 score @ beam size of %d is %.4f." % (beam_size, evaluate(beam_size)))
