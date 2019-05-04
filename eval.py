@@ -14,17 +14,17 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # Parameters
-# data_folder = "datasets_coco" # folder with data files saved by create_input_files.py
-# data_name = 'coco_5_cap_per_img_5_min_word_freq'  # base name shared by data files
+data_folder = "datasets_coco" # folder with data files saved by create_input_files.py
+data_name = 'coco_5_cap_per_img_5_min_word_freq'  # base name shared by data files
 
-# checkpoint = 'BEST_checkpoint_coco_5_cap_per_img_5_min_word_freq.pth.tar'  # model checkpoint
-# word_map_file = 'WORDMAP_coco_5_cap_per_img_5_min_word_freq.json'  # word map, ensure it's the same the data was encoded with and the model was trained with
+checkpoint = 'BEST_checkpoint_coco_5_cap_per_img_5_min_word_freq.pth.tar'  # model checkpoint
+word_map_file = 'WORDMAP_coco_5_cap_per_img_5_min_word_freq.json'  # word map, ensure it's the same the data was encoded with and the model was trained with
 
-data_folder = 'datasets_8k'  
-data_name = 'flickr8k_5_cap_per_img_5_min_word_freq' 
+# data_folder = 'datasets_8k'  
+# data_name = 'flickr8k_5_cap_per_img_5_min_word_freq' 
 
-checkpoint = "BEST_checkpoint_flickr8k_5_cap_per_img_5_min_word_freq.pth.tar"
-word_map_file = "WORDMAP_flickr8k_5_cap_per_img_5_min_word_freq.json"
+# checkpoint = "BEST_checkpoint_flickr8k_5_cap_per_img_5_min_word_freq.pth.tar"
+# word_map_file = "WORDMAP_flickr8k_5_cap_per_img_5_min_word_freq.json"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  # sets device for model and PyTorch tensors
 cudnn.benchmark = True  # set to true only if inputs to model are fixed size; otherwise lot of computational overhead
@@ -197,35 +197,23 @@ def evaluate(beam_size):
 
     # meteor = round(meteor_score(references, hypotheses),4)
     # print("meteor: ", meteor)
+
+    # weights = (1./2., 1./2.)
+    # bleu2 = corpus_bleu(references, hypotheses, weights)
+    # print("BLEU-2: ", bleu2)
+    
+    # weights = (1./3., 1./3., 1./3.)
+    # bleu3 = corpus_bleu(references, hypotheses, weights)
+    # print("BLEU-3: ", bleu3)    
+
+    # weights = (1./5., 1./5., 1./5., 1./5., 1./5.)
+    # bleu5 = corpus_bleu(references, hypotheses, weights)
+    # print("BLEU-5: ", bleu5)
+
     return bleu4
 
 
 if __name__ == '__main__':
     beam_size = 2
-    with open('references.pickle', 'rb') as f1:
-        references = pickle.load(f1)
 
-    with open('hypotheses.pickle', 'rb') as f2:
-        hypotheses = pickle.load(f2)
-
-
-    weights = (1./2., 1./2.)
-    bleu2 = corpus_bleu(references, hypotheses, weights)
-    print("BLEU-2: ", bleu2)
-    
-    weights = (1./3., 1./3., 1./3.)
-    bleu3 = corpus_bleu(references, hypotheses, weights)
-    print("BLEU-3: ", bleu3)    
-
-    # bleu4 = corpus_bleu(references, hypotheses)
-    # print("BLEU-4: ", bleu4)
-
-
-    weights = (1./5., 1./5., 1./5., 1./5., 1./5.)
-    bleu5 = corpus_bleu(references, hypotheses, weights)
-    print("BLEU-5: ", bleu5)
-
-    # meteor = round(meteor_score(references, hypotheses),4)
-    # print("meteor: ", meteor)
-
-    # print("\nBLEU-4 score @ beam size of %d is %.4f." % (beam_size, evaluate(beam_size)))
+    print("\nBLEU-4 score @ beam size of %d is %.4f." % (beam_size, evaluate(beam_size)))
