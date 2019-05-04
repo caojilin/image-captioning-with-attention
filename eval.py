@@ -5,7 +5,6 @@ import torchvision.transforms as transforms
 from datasets import *
 from utils import *
 from nltk.translate.bleu_score import corpus_bleu
-from nltk.translate.meteor_score import meteor_score
 import torch.nn.functional as F
 from tqdm import tqdm
 import pickle
