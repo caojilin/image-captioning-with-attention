@@ -29,8 +29,9 @@ b = hypotheses
 #     the_file.write('Hello\n')
 
 
-word_map_file = "WORDMAP_flickr8k_5_cap_per_img_5_min_word_freq.json"
+# word_map_file = "WORDMAP_flickr8k_5_cap_per_img_5_min_word_freq.json"
 
+word_map_file = "WORDMAP_coco_5_cap_per_img_5_min_word_freq.json"
 # seq = [9, 2166, 12, 3, 4, 59, 67, 1, 983, 231]
 
 
