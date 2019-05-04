@@ -213,7 +213,7 @@ if __name__ == '__main__':
 
 
     weights = (1./5., 1./5., 1./5., 1./5., 1./5.)
-    bleu5 = corpus_bleu(list_of_references, hypotheses, weights)
+    bleu5 = corpus_bleu(references, hypotheses, weights)
     print("BLEU-5: ", bleu5)
 
     # meteor = round(meteor_score(references, hypotheses),4)
