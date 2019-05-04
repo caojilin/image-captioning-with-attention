@@ -8,6 +8,7 @@ from nltk.translate.bleu_score import corpus_bleu
 import torch.nn.functional as F
 from tqdm import tqdm
 import pickle
+import argparse
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -213,6 +214,8 @@ def evaluate(beam_size):
 
 
 if __name__ == '__main__':
-    beam_size = 2
-
+    parser = argparse.ArgumentParser(description='evaluation')
+    parser.add_argument('--beam_size', '-b', default=5, type=int, help='beam size for beam search')
+    args = parser.parse_args()
+    beam_size = args.beam_size
     print("\nBLEU-4 score @ beam size of %d is %.4f." % (beam_size, evaluate(beam_size)))
