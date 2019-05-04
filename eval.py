@@ -209,11 +209,11 @@ if __name__ == '__main__':
         hypotheses = pickle.load(f2)
 
 
-    weights = (1./5., 1./5.)
+    weights = (1./2., 1./2.)
     bleu2 = corpus_bleu(references, hypotheses, weights)
     print("BLEU-2: ", bleu2)
     
-    weights = (1./5., 1./5., 1./5.)
+    weights = (1./3., 1./3., 1./3.)
     bleu3 = corpus_bleu(references, hypotheses, weights)
     print("BLEU-3: ", bleu3)    
 

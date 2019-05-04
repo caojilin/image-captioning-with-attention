@@ -10,8 +10,9 @@ import argparse
 from scipy.misc import imread, imresize
 from PIL import Image
 
-# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-device = torch.device("cpu")
+import warnings
+warnings.filterwarnings("ignore")
+
 
 
 def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=3):
@@ -196,9 +197,13 @@ if __name__ == '__main__':
     parser.add_argument('--dont_smooth', dest='smooth', action='store_false', help='do not smooth alpha overlay')
 
     args = parser.parse_args()
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    # args.model = "BEST_checkpoint_flickr8k_5_cap_per_img_5_min_word_freq.pth.tar"
+    # args.word_map = "WORDMAP_flickr8k_5_cap_per_img_5_min_word_freq.json"
+    # args.img = "img/1.jpg"
     # Load model
-    checkpoint = torch.load(args.model)
+    checkpoint = torch.load(args.model, map_location='cpu')
     decoder = checkpoint['decoder']
     decoder = decoder.to(device)
     decoder.eval()
