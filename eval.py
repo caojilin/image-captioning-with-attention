@@ -208,6 +208,15 @@ if __name__ == '__main__':
     with open('hypotheses.pickle', 'rb') as f2:
         hypotheses = pickle.load(f2)
 
+
+    weights = (1./5., 1./5.)
+    bleu2 = corpus_bleu(references, hypotheses, weights)
+    print("BLEU-2: ", bleu2)
+    
+    weights = (1./5., 1./5., 1./5.)
+    bleu3 = corpus_bleu(references, hypotheses, weights)
+    print("BLEU-3: ", bleu3)    
+
     # bleu4 = corpus_bleu(references, hypotheses)
     # print("BLEU-4: ", bleu4)
 
