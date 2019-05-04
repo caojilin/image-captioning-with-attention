@@ -16,3 +16,9 @@ with open('references.pickle', 'wb') as f1:
 
 with open('hypotheses.pickle', 'wb') as f2:
     pickle.dump(hypotheses, f2, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open('references.pickle', 'rb') as f1:
+    references = pickle.load(f1)
+
+with open('hypotheses.pickle', 'rb') as f2:
+    hypotheses = pickle.load(f2)

@@ -9,6 +9,7 @@ from nltk.translate.meteor_score import meteor_score
 import torch.nn.functional as F
 from tqdm import tqdm
 import pickle
+from nltk.tokenize
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -202,16 +203,17 @@ def evaluate(beam_size):
 
 if __name__ == '__main__':
     beam_size = 2
-    with open('references.pickle', 'rb') as f1:
-        references = pickle.load(f1)
+    # with open('references.pickle', 'rb') as f1:
+    #     references = pickle.load(f1)
 
-    with open('hypotheses.pickle', 'rb') as f2:
-        hypotheses = pickle.load(f2)
+    # with open('hypotheses.pickle', 'rb') as f2:
+    #     hypotheses = pickle.load(f2)
 
-    bleu4 = corpus_bleu(references, hypotheses)
-    print("BLEU-4: ", bleu4)
+    # bleu4 = corpus_bleu(references, hypotheses)
+    # print("BLEU-4: ", bleu4)
 
-    meteor = round(meteor_score(references, hypotheses),4)
-    print("meteor: ", meteor)
-    
+
+    # meteor = round(meteor_score(references, hypotheses),4)
+    # print("meteor: ", meteor)
+
     print("\nBLEU-4 score @ beam size of %d is %.4f." % (beam_size, evaluate(beam_size)))
