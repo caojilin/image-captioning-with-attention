@@ -20,3 +20,9 @@ Epoch: [0][6/2213]	Batch Time 15.148 (16.198)	Data Load Time 14.277 (15.047)	Los
 ~ 30 s per step
 
 quite similar
+
+with num_worker = 2
+Epoch: [0][6/2213]	Batch Time 21.574 (14.139)	Data Load Time 20.646 (12.977)	Loss 8.1058 (8.8538)	Top-5 Accuracy 27.366 (21.123)
+Epoch: [0][7/2213]	Batch Time 0.855 (12.478)	Data Load Time 0.000 (11.355)	Loss 7.9220 (8.7366)	Top-5 Accuracy 29.136 (22.130)
+
+40/2 ~ 20 s per step
