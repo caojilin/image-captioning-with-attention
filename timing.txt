@@ -1,0 +1,4 @@
+with fine tuning, flickr8k, resnet101, v100 gpu, batch size = 80, gpu usage 14793MiB / 16130MiB
+
+Epoch: [0][138/375]	Batch Time 0.596 (0.624)
+

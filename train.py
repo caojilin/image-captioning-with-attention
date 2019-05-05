@@ -11,8 +11,12 @@ from utils import *
 from nltk.translate.bleu_score import corpus_bleu
 
 # Data parameters
-data_folder = 'datasets_8k'  # folder with data files saved by create_input_files.py
-data_name = 'flickr8k_5_cap_per_img_5_min_word_freq'  # base name shared by data files
+# data_folder = 'datasets_8k'  # folder with data files saved by create_input_files.py
+# data_name = 'flickr8k_5_cap_per_img_5_min_word_freq'  # base name shared by data files
+
+# # Parameters
+data_folder = "datasets_coco" # folder with data files saved by create_input_files.py
+data_name = 'coco_5_cap_per_img_5_min_word_freq'  # base name shared by data files
 
 # Model parameters
 emb_dim = 512  # dimension of word embeddings
@@ -26,7 +30,7 @@ cudnn.benchmark = True  # set to true only if inputs to model are fixed size; ot
 start_epoch = 0
 epochs = 80  # number of epochs to train for (if early stopping is not triggered)
 epochs_since_improvement = 0  # keeps track of number of epochs since there's been an improvement in validation BLEU
-batch_size = 80
+batch_size = 128
 workers = 4  # for data-loading; right now, only 1 works with h5py
 encoder_lr = 1e-4  # learning rate for encoder if fine-tuning
 decoder_lr = 4e-4  # learning rate for decoder
@@ -34,7 +38,7 @@ grad_clip = 5.  # clip gradients at an absolute value of
 alpha_c = 1.  # regularization parameter for 'doubly stochastic attention', as in the paper
 best_bleu4 = 0.  # BLEU-4 score right now
 print_freq = 1  # print training/validation stats every __ batches
-fine_tune_encoder = True  # fine-tune encoder?
+fine_tune_encoder = False  # fine-tune encoder?
 # checkpoint = "BEST_checkpoint_coco_5_cap_per_img_5_min_word_freq.pth.tar"  # path to checkpoint, None if none
 checkpoint = None
 
