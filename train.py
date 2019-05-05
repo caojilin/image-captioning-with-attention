@@ -272,11 +272,17 @@ def validate(val_loader, encoder, decoder, criterion):
             # Remove timesteps that we didn't decode at, or are pads
             # pack_padded_sequence is an easy trick to do this
             scores_copy = scores.clone()
-            scores, _ = pack_padded_sequence(scores, decode_lengths, batch_first=True)
-            targets, _ = pack_padded_sequence(targets, decode_lengths, batch_first=True)
-
-            # Calculate loss
+            # scores, _ = pack_padded_sequence(scores, decode_lengths, batch_first=True)
+            # targets, _ = pack_padded_sequence(targets, decode_lengths, batch_first=True)
+            #torch 1.1.0 version
+            scores = pack_padded_sequence(scores, decode_lengths, batch_first=True)
+            targets = pack_padded_sequence(targets, decode_lengths, batch_first=True)
+            scores = scores.data
+            targets = targets.data
             loss = criterion(scores, targets)
+
+            # # Calculate loss
+            # loss = criterion(scores, targets)
 
             # Add doubly stochastic attention regularization
             loss += alpha_c * ((1. - alphas.sum(dim=1)) ** 2).mean()
