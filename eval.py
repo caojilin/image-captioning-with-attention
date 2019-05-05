@@ -13,18 +13,19 @@ import argparse
 import warnings
 warnings.filterwarnings("ignore")
 
-# Parameters
-data_folder = "datasets_coco" # folder with data files saved by create_input_files.py
-data_name = 'coco_5_cap_per_img_5_min_word_freq'  # base name shared by data files
+# # Parameters
+# data_folder = "datasets_coco" # folder with data files saved by create_input_files.py
+# data_name = 'coco_5_cap_per_img_5_min_word_freq'  # base name shared by data files
+#
+# checkpoint = 'BEST_checkpoint_coco_5_cap_per_img_5_min_word_freq.pth.tar'  # model checkpoint
+# # word map, ensure it's the same the data was encoded with and the model was trained with
+# word_map_file = 'WORDMAP_coco_5_cap_per_img_5_min_word_freq.json'
 
-checkpoint = 'BEST_checkpoint_coco_5_cap_per_img_5_min_word_freq.pth.tar'  # model checkpoint
-word_map_file = 'WORDMAP_coco_5_cap_per_img_5_min_word_freq.json'  # word map, ensure it's the same the data was encoded with and the model was trained with
+data_folder = 'datasets_8k'  
+data_name = 'flickr8k_5_cap_per_img_5_min_word_freq'
 
-# data_folder = 'datasets_8k'  
-# data_name = 'flickr8k_5_cap_per_img_5_min_word_freq' 
-
-# checkpoint = "BEST_checkpoint_flickr8k_5_cap_per_img_5_min_word_freq.pth.tar"
-# word_map_file = "WORDMAP_flickr8k_5_cap_per_img_5_min_word_freq.json"
+checkpoint = "BEST_checkpoint_flickr8k_5_cap_per_img_5_min_word_freq.pth.tar"
+word_map_file = "WORDMAP_flickr8k_5_cap_per_img_5_min_word_freq.json"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  # sets device for model and PyTorch tensors
 cudnn.benchmark = True  # set to true only if inputs to model are fixed size; otherwise lot of computational overhead
