@@ -2,6 +2,11 @@ with fine tuning, flickr8k, resnet101, v100 gpu, batch size = 80, gpu usage 1479
 
 Epoch: [0][138/375]	Batch Time 0.596 (0.624)
 
-without fine tuning, coco, resnet101, v100 gpu, batch size = 128, gpu usage 14793MiB / 16130MiB
+without fine tuning, coco, resnet101, v100 gpu, batch size = 128*2, gpu usage 12461MiB / 16130MiB
 
-Epoch: [0][1/4426]	Batch Time 0.438 (22.891)
+data loading is a issue
+
+Epoch: [0][28/2213]	Batch Time 63.871 (20.279)	Data Load Time 63.015 (19.352)	Loss 6.4317 (7.4201)	Top-5 Accuracy 33.694 (30.508)
+Epoch: [0][29/2213]	Batch Time 2.245 (19.678)	Data Load Time 1.400 (18.754)	Loss 6.5154 (7.3898)	Top-5 Accuracy 32.982 (30.591)
+Epoch: [0][30/2213]	Batch Time 0.830 (19.070)	Data Load Time 0.000 (18.149)	Loss 6.3852 (7.3577)	Top-5 Accuracy 34.652 (30.721)
+Epoch: [0][31/2213]	Batch Time 0.851 (18.501)	Data Load Time 0.000 (17.582)	Loss 6.4064 (7.3280)	Top-5 Accuracy 33.969 (30.822)
