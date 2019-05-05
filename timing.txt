@@ -1,6 +1,11 @@
-with fine tuning, flickr8k, resnet101, v100 gpu, batch size = 80, gpu usage 14793MiB / 16130MiB
+with fine tuning, coco, resnet101, v100 gpu, batch size = 80, gpu usage 14793MiB / 16130MiB
+if batch_size = 100, out of memory
+with num_worker = 2, the cycle is also two
+Epoch: [0][12/7081]	Batch Time 6.416 (3.995)	Data Load Time 5.813 (3.231)	Loss 7.3313 (8.2940)	Top-5 Accuracy 34.650 (26.618)
+Epoch: [0][13/7081]	Batch Time 0.623 (3.754)	Data Load Time 0.000 (3.000)	Loss 7.4413 (8.2316)	Top-5 Accuracy 32.265 (27.031)
+~ 6s per step
 
-Epoch: [0][138/375]	Batch Time 0.596 (0.624)
+
 
 without fine tuning, coco, resnet101, v100 gpu, batch size = 128*2, gpu usage 12461MiB / 16130MiB
 
@@ -11,7 +16,7 @@ Epoch: [0][29/2213]	Batch Time 2.245 (19.678)	Data Load Time 1.400 (18.754)	Loss
 Epoch: [0][30/2213]	Batch Time 0.830 (19.070)	Data Load Time 0.000 (18.149)	Loss 6.3852 (7.3577)	Top-5 Accuracy 34.652 (30.721)
 Epoch: [0][31/2213]	Batch Time 0.851 (18.501)	Data Load Time 0.000 (17.582)	Loss 6.4064 (7.3280)	Top-5 Accuracy 33.969 (30.822)
 
-65*2 / 4 ~ 32 s per step
+~ 32 s per step
 
 with num_worker = 1
 Epoch: [0][5/2213]	Batch Time 15.937 (16.373)	Data Load Time 15.091 (15.175)	Loss 8.0937 (8.9887)	Top-5 Accuracy 29.719 (20.422)
@@ -25,4 +30,4 @@ with num_worker = 2
 Epoch: [0][6/2213]	Batch Time 21.574 (14.139)	Data Load Time 20.646 (12.977)	Loss 8.1058 (8.8538)	Top-5 Accuracy 27.366 (21.123)
 Epoch: [0][7/2213]	Batch Time 0.855 (12.478)	Data Load Time 0.000 (11.355)	Loss 7.9220 (8.7366)	Top-5 Accuracy 29.136 (22.130)
 
-40/2 ~ 20 s per step
+~ 20 s per step
