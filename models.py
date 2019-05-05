@@ -15,6 +15,9 @@ class Encoder(nn.Module):
         self.enc_image_size = encoded_image_size
 
         resnet = torchvision.models.resnet101(pretrained=True)  # pretrained ImageNet ResNet-101
+        vgg16 = torchvision.models.vgg16_bn(pretrained=True)
+        torchvision.models.densenet121(pretrained=True)
+
 
         # Remove linear and pool layers (since we're not doing classification)
         modules = list(resnet.children())[:-2]
