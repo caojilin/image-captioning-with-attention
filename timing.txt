@@ -4,9 +4,19 @@ Epoch: [0][138/375]	Batch Time 0.596 (0.624)
 
 without fine tuning, coco, resnet101, v100 gpu, batch size = 128*2, gpu usage 12461MiB / 16130MiB
 
-data loading is a issue
+data loading is a issue, num_worker = 4
 
 Epoch: [0][28/2213]	Batch Time 63.871 (20.279)	Data Load Time 63.015 (19.352)	Loss 6.4317 (7.4201)	Top-5 Accuracy 33.694 (30.508)
 Epoch: [0][29/2213]	Batch Time 2.245 (19.678)	Data Load Time 1.400 (18.754)	Loss 6.5154 (7.3898)	Top-5 Accuracy 32.982 (30.591)
 Epoch: [0][30/2213]	Batch Time 0.830 (19.070)	Data Load Time 0.000 (18.149)	Loss 6.3852 (7.3577)	Top-5 Accuracy 34.652 (30.721)
 Epoch: [0][31/2213]	Batch Time 0.851 (18.501)	Data Load Time 0.000 (17.582)	Loss 6.4064 (7.3280)	Top-5 Accuracy 33.969 (30.822)
+
+65*2 / 4 ~ 32 s per step
+
+with num_worker = 1
+Epoch: [0][5/2213]	Batch Time 15.937 (16.373)	Data Load Time 15.091 (15.175)	Loss 8.0937 (8.9887)	Top-5 Accuracy 29.719 (20.422)
+Epoch: [0][6/2213]	Batch Time 15.148 (16.198)	Data Load Time 14.277 (15.047)	Loss 7.9216 (8.8362)	Top-5 Accuracy 30.296 (21.834)
+
+~ 30 s per step
+
+quite similar
