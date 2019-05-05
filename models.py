@@ -23,7 +23,10 @@ class Encoder(nn.Module):
             # Remove linear and pool layers (since we're not doing classification)
             modules = list(resnet.children())[:-2]
             self.model = nn.Sequential(*modules)
-
+        elif model_name == "squeezenet":
+            modules = list(resnet.children())
+            modules[-1] = modules[-1][:3]
+            self.model = nn.Sequential(*modules)
 
         # Resize image to fixed size to allow input images of variable size
         self.adaptive_pool = nn.AdaptiveAvgPool2d((encoded_image_size, encoded_image_size))
