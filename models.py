@@ -14,10 +14,10 @@ class Encoder(nn.Module):
         super(Encoder, self).__init__()
         self.enc_image_size = encoded_image_size
 
-        resnet = torchvision.models.resnet101(pretrained=True)  # pretrained ImageNet ResNet-101
-        vgg16 = torchvision.models.vgg16_bn(pretrained=True)
-        densenet = torchvision.models.densenet121(pretrained=True)
-        squeezenet = torchvision.models.squeezenet1_1(pretrained=True)
+        resnet = torchvision.models.resnet101(pretrained=False)  # pretrained ImageNet ResNet-101
+        vgg16 = torchvision.models.vgg16_bn(pretrained=False)
+        densenet = torchvision.models.densenet121(pretrained=False)
+        squeezenet = torchvision.models.squeezenet1_1(pretrained=False)
 
         if model_name == "resnet":
             # Remove linear and pool layers (since we're not doing classification)
@@ -30,8 +30,6 @@ class Encoder(nn.Module):
 
         # Resize image to fixed size to allow input images of variable size
         self.adaptive_pool = nn.AdaptiveAvgPool2d((encoded_image_size, encoded_image_size))
-
-        self.fine_tune()
 
     def forward(self, images):
         """
@@ -52,7 +50,7 @@ class Encoder(nn.Module):
         :param fine_tune: Allow?
         """
         for p in self.resnet.parameters():
-            p.requires_grad = False
+            p.requires_grad = fine_tune
         # If fine-tuning, only fine-tune convolutional blocks 2 through 4
         for c in list(self.resnet.children())[5:]:
             for p in c.parameters():
