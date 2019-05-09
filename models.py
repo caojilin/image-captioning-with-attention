@@ -4,6 +4,9 @@ import torchvision
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+x=torch.rand(1,3,256,256)
+
+
 
 class Encoder(nn.Module):
     """
@@ -16,7 +19,6 @@ class Encoder(nn.Module):
 
         resnet = torchvision.models.resnet101(pretrained=False)  # pretrained ImageNet ResNet-101
         vgg16 = torchvision.models.vgg16_bn(pretrained=False)
-        densenet = torchvision.models.densenet121(pretrained=False)
         squeezenet = torchvision.models.squeezenet1_1(pretrained=False)
 
         if model_name == "resnet":
@@ -26,6 +28,10 @@ class Encoder(nn.Module):
         elif model_name == "squeezenet":
             modules = list(squeezenet.children())
             modules[-1] = modules[-1][:3]
+            self.resnet = nn.Sequential(*modules)
+        elif model_name == "vgg":
+            modules = list(vgg16.children())
+            modules = modules[:-2]
             self.resnet = nn.Sequential(*modules)
 
         # Resize image to fixed size to allow input images of variable size
@@ -56,6 +62,10 @@ class Encoder(nn.Module):
             for p in c.parameters():
                 p.requires_grad = fine_tune
 
+
+encoder1 = Encoder(model_name="vgg")
+encoder2 = Encoder(model_name="resnet")
+encoder3 = Encoder(model_name="squeezenet")
 
 class Attention(nn.Module):
     """
