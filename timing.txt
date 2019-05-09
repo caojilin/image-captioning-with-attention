@@ -2,7 +2,7 @@ with fine tuning, coco, resnet101, v100 gpu, batch size = 80, gpu usage 14793MiB
 if batch_size = 100, out of memory
 with num_worker = 2, the cycle is also two
 Epoch: [0][12/7081]	Batch Time 6.416 (3.995)	Data Load Time 5.813 (3.231)	Loss 7.3313 (8.2940)	Top-5 Accuracy 34.650 (26.618)
-Epoch: [0][13/7081]	Batch Time 0.623 (3.754)	Data Load Time 0.000 (3.000)	Loss 7.4413 (8.2316)	Top-5 Accuracy 32.265 (27.031)
+Epoch: [0][13/7081]	Batch Time q0.623 (3.754)	Data Load Time 0.000 (3.000)	Loss 7.4413 (8.2316)	Top-5 Accuracy 32.265 (27.031)
 ~ 6s per step
 
 

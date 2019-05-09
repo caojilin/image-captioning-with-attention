@@ -56,17 +56,24 @@ def main():
 
     # Initialize / load checkpoint
     if checkpoint is None:
+
+        # encoder = Encoder()
+        #squeezenet?
+        encoder = Encoder(model_name="squeezenet")
+        encoder_dim = 1000
+        encoder.fine_tune(fine_tune_encoder)
+        encoder_optimizer = torch.optim.Adam(params=filter(lambda p: p.requires_grad, encoder.parameters()),
+                                             lr=encoder_lr) if fine_tune_encoder else None
+
         decoder = DecoderWithAttention(attention_dim=attention_dim,
                                        embed_dim=emb_dim,
                                        decoder_dim=decoder_dim,
                                        vocab_size=len(word_map),
-                                       dropout=dropout)
+                                       dropout=dropout,
+                                       encoder_dim=encoder_dim)
+        
         decoder_optimizer = torch.optim.Adam(params=filter(lambda p: p.requires_grad, decoder.parameters()),
                                              lr=decoder_lr)
-        encoder = Encoder()
-        encoder.fine_tune(fine_tune_encoder)
-        encoder_optimizer = torch.optim.Adam(params=filter(lambda p: p.requires_grad, encoder.parameters()),
-                                             lr=encoder_lr) if fine_tune_encoder else None
 
     else:
         checkpoint = torch.load(checkpoint)
