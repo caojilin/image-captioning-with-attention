@@ -15,7 +15,7 @@ from nltk.translate.bleu_score import corpus_bleu
 # data_name = 'flickr8k_5_cap_per_img_5_min_word_freq'  # base name shared by data files
 
 # # Parameters
-data_folder = "datasets_coco" # folder with data files saved by create_input_files.py
+data_folder = "datasets_coco"  # folder with data files saved by create_input_files.py
 data_name = 'coco_5_cap_per_img_5_min_word_freq'  # base name shared by data files
 
 # Model parameters
@@ -40,6 +40,8 @@ best_bleu4 = 0.  # BLEU-4 score right now
 print_freq = 1  # print training/validation stats every __ batches
 fine_tune_encoder = True  # fine-tune encoder?
 checkpoint = "BEST_checkpoint_coco_5_cap_per_img_5_min_word_freq.pth.tar"
+
+
 # checkpoint = # path to checkpoint, None if none
 
 def main():
@@ -61,7 +63,7 @@ def main():
         # squeezenet?
         encoder = Encoder(model_name="squeezenet")
         encoder_dim = 1000
-        #vgg
+        # vgg
         # encoder = Encoder(model_name="vgg")
         # encoder_dim = 512
         encoder.fine_tune(fine_tune_encoder)
@@ -119,7 +121,7 @@ def main():
             adjust_learning_rate(decoder_optimizer, 0.8)
             if fine_tune_encoder:
                 adjust_learning_rate(encoder_optimizer, 0.8)
-        #start fine-tuning after bleu4 reaches 23, so break this loop
+        # start fine-tuning after bleu4 reaches 23, so break this loop
         if best_bleu4 >= 23:
             break
         # One epoch's training
@@ -243,12 +245,14 @@ def train(train_loader, encoder, decoder, criterion, encoder_optimizer, decoder_
                                                                           data_time=data_time, loss=losses,
                                                                           top5=top5accs))
             with open('log.txt', 'a') as the_file:
-                    the_file.write('Epoch: [{0}][{1}/{2}]\t'
-                  'Batch Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
-                  'Data Load Time {data_time.val:.3f} ({data_time.avg:.3f})\t'
-                  'Loss {loss.val:.4f} ({loss.avg:.4f})\t\n'.format(epoch, i, len(train_loader),
-                                                                          batch_time=batch_time,
-                                                                          data_time=data_time, loss=losses))
+                the_file.write('Epoch: [{0}][{1}/{2}]\t'
+                               'Batch Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
+                               'Data Load Time {data_time.val:.3f} ({data_time.avg:.3f})\t'
+                               'Loss {loss.val:.4f} ({loss.avg:.4f})\t\n'.format(epoch, i, len(train_loader),
+                                                                                 batch_time=batch_time,
+                                                                                 data_time=data_time, loss=losses))
+
+
 def validate(val_loader, encoder, decoder, criterion):
     """
     Performs one epoch's validation.
@@ -296,7 +300,7 @@ def validate(val_loader, encoder, decoder, criterion):
             scores_copy = scores.clone()
             # scores, _ = pack_padded_sequence(scores, decode_lengths, batch_first=True)
             # targets, _ = pack_padded_sequence(targets, decode_lengths, batch_first=True)
-            #torch 1.1.0 version
+            # torch 1.1.0 version
             scores = pack_padded_sequence(scores, decode_lengths, batch_first=True)
             targets = pack_padded_sequence(targets, decode_lengths, batch_first=True)
             scores = scores.data
@@ -320,8 +324,17 @@ def validate(val_loader, encoder, decoder, criterion):
                 print('Validation: [{0}/{1}]\t'
                       'Batch Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                       'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-                      'Top-5 Accuracy {top5.val:.3f} ({top5.avg:.3f})\t'.format(i, len(val_loader), batch_time=batch_time,
+                      'Top-5 Accuracy {top5.val:.3f} ({top5.avg:.3f})\t'.format(i, len(val_loader),
+                                                                                batch_time=batch_time,
                                                                                 loss=losses, top5=top5accs))
+
+            with open('validation.txt', 'a') as the_file:
+                the_file.write('Validation: [{0}/{1}]\t'
+                               'Batch Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
+                               'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
+                               'Top-5 Accuracy {top5.val:.3f} ({top5.avg:.3f})\t'.format(i, len(val_loader),
+                                                                                         batch_time=batch_time,
+                                                                                         loss=losses, top5=top5accs))
 
             # Store references (true captions), and hypothesis (prediction) for each image
             # If for n images, we have n hypotheses, and references a, b, c... for each image, we need -
