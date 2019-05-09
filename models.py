@@ -24,7 +24,7 @@ class Encoder(nn.Module):
             modules = list(resnet.children())[:-2]
             self.resnet = nn.Sequential(*modules)
         elif model_name == "squeezenet":
-            modules = list(resnet.children())
+            modules = list(squeezenet.children())
             modules[-1] = modules[-1][:3]
             self.resnet = nn.Sequential(*modules)
 
