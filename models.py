@@ -16,9 +16,9 @@ class Encoder(nn.Module):
         super(Encoder, self).__init__()
         self.enc_image_size = encoded_image_size
 
-        resnet = torchvision.models.resnet101(pretrained=False)  # pretrained ImageNet ResNet-101
-        vgg16 = torchvision.models.vgg16_bn(pretrained=False)
-        squeezenet = torchvision.models.squeezenet1_1(pretrained=False)
+        resnet = torchvision.models.resnet101(pretrained=True)  # pretrained ImageNet ResNet-101
+        vgg16 = torchvision.models.vgg16_bn(pretrained=True)
+        squeezenet = torchvision.models.squeezenet1_1(pretrained=True)
 
         if model_name == "resnet":
             # Remove linear and pool layers (since we're not doing classification)
@@ -57,14 +57,14 @@ class Encoder(nn.Module):
         for p in self.resnet.parameters():
             p.requires_grad = fine_tune
         # If fine-tuning, only fine-tune convolutional blocks 2 through 4
-        for c in list(self.resnet.children())[5:]:
-            for p in c.parameters():
-                p.requires_grad = fine_tune
+        # for c in list(self.resnet.children())[5:]:
+        #     for p in c.parameters():
+        #         p.requires_grad = fine_tune
 
 
-encoder1 = Encoder(model_name="vgg")
-encoder2 = Encoder(model_name="resnet")
-encoder3 = Encoder(model_name="squeezenet")
+# encoder1 = Encoder(model_name="vgg")
+# encoder2 = Encoder(model_name="resnet")
+# encoder3 = Encoder(model_name="squeezenet")
 
 
 class Attention(nn.Module):
