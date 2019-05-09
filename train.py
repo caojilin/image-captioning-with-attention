@@ -38,9 +38,9 @@ grad_clip = 5.  # clip gradients at an absolute value of
 alpha_c = 1.  # regularization parameter for 'doubly stochastic attention', as in the paper
 best_bleu4 = 0.  # BLEU-4 score right now
 print_freq = 1  # print training/validation stats every __ batches
-fine_tune_encoder = False  # fine-tune encoder?
-# checkpoint = "BEST_checkpoint_coco_5_cap_per_img_5_min_word_freq.pth.tar"  # path to checkpoint, None if none
-checkpoint = None
+fine_tune_encoder = True  # fine-tune encoder?
+checkpoint = "BEST_checkpoint_coco_5_cap_per_img_5_min_word_freq.pth.tar"
+# checkpoint = # path to checkpoint, None if none
 
 def main():
     """
@@ -58,12 +58,12 @@ def main():
     if checkpoint is None:
 
         # encoder = Encoder()
-        #squeezenet?
-        # encoder = Encoder(model_name="squeezenet")
-        # encoder_dim = 1000
+        # squeezenet?
+        encoder = Encoder(model_name="squeezenet")
+        encoder_dim = 1000
         #vgg
-        encoder = Encoder(model_name="vgg")
-        encoder_dim = 512
+        # encoder = Encoder(model_name="vgg")
+        # encoder_dim = 512
         encoder.fine_tune(fine_tune_encoder)
         encoder_optimizer = torch.optim.Adam(params=filter(lambda p: p.requires_grad, encoder.parameters()),
                                              lr=encoder_lr) if fine_tune_encoder else None
