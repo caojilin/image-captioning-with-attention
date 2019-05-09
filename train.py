@@ -62,8 +62,8 @@ def main():
         encoder = Encoder(model_name="squeezenet")
         encoder_dim = 1000
         #vgg
-        encoder = Encoder(model_name="vgg")
-        encoder_dim = 512
+        # encoder = Encoder(model_name="vgg")
+        # encoder_dim = 512
         encoder.fine_tune(fine_tune_encoder)
         encoder_optimizer = torch.optim.Adam(params=filter(lambda p: p.requires_grad, encoder.parameters()),
                                              lr=encoder_lr) if fine_tune_encoder else None

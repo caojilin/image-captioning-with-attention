@@ -4,8 +4,7 @@ import torchvision
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-x=torch.rand(1,3,256,256)
-
+x = torch.rand(1, 3, 256, 256)
 
 
 class Encoder(nn.Module):
@@ -66,6 +65,7 @@ class Encoder(nn.Module):
 encoder1 = Encoder(model_name="vgg")
 encoder2 = Encoder(model_name="resnet")
 encoder3 = Encoder(model_name="squeezenet")
+
 
 class Attention(nn.Module):
     """

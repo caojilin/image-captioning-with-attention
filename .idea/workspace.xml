@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5c0d24e2-9084-47f6-8b20-1ac0727bf1c6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval_files_resnet101_coco/results.txt" beforeDir="false" afterPath="$PROJECT_DIR$/eval_files_resnet101_coco/results.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timing.txt" beforeDir="false" afterPath="$PROJECT_DIR$/timing.txt" afterDir="false" />
-    </list>
+    <list default="true" id="5c0d24e2-9084-47f6-8b20-1ac0727bf1c6" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +172,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="797" />
