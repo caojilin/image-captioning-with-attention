@@ -30,7 +30,7 @@ cudnn.benchmark = True  # set to true only if inputs to model are fixed size; ot
 start_epoch = 0
 epochs = 32  # number of epochs to train for (if early stopping is not triggered)
 epochs_since_improvement = 0  # keeps track of number of epochs since there's been an improvement in validation BLEU
-batch_size = 80
+batch_size = 128
 workers = 2  # for data-loading; right now, only 1 works with h5py
 encoder_lr = 1e-4  # learning rate for encoder if fine-tuning
 decoder_lr = 4e-4  # learning rate for decoder
@@ -332,7 +332,7 @@ def validate(val_loader, encoder, decoder, criterion):
                 the_file.write('Validation: [{0}/{1}]\t'
                                'Batch Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                                'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-                               'Top-5 Accuracy {top5.val:.3f} ({top5.avg:.3f})\t'.format(i, len(val_loader),
+                               'Top-5 Accuracy {top5.val:.3f} ({top5.avg:.3f})\n'.format(i, len(val_loader),
                                                                                          batch_time=batch_time,
                                                                                          loss=losses, top5=top5accs))
 
@@ -368,6 +368,8 @@ def validate(val_loader, encoder, decoder, criterion):
                 loss=losses,
                 top5=top5accs,
                 bleu=bleu4))
+        with open("bleu.txt", "a") as file:
+            file.write("bleu4: {0}".format(bleu4))
 
     return bleu4
 
