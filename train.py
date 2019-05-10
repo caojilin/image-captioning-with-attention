@@ -125,13 +125,13 @@ def main():
         if best_bleu4 >= 23:
             break
         # One epoch's training
-        train(train_loader=train_loader,
-              encoder=encoder,
-              decoder=decoder,
-              criterion=criterion,
-              encoder_optimizer=encoder_optimizer,
-              decoder_optimizer=decoder_optimizer,
-              epoch=epoch)
+        # train(train_loader=train_loader,
+        #       encoder=encoder,
+        #       decoder=decoder,
+        #       criterion=criterion,
+        #       encoder_optimizer=encoder_optimizer,
+        #       decoder_optimizer=decoder_optimizer,
+        #       epoch=epoch)
 
         # One epoch's validation
         recent_bleu4 = validate(val_loader=val_loader,
