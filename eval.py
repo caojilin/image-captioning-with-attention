@@ -185,31 +185,12 @@ def evaluate(beam_size):
     # Calculate BLEU-4 scores
     bleu4 = corpus_bleu(references, hypotheses)
 
-    # Calculate BLEU-5 scores
-    # weights = (1./5., 1./5., 1./5., 1./5., 1./5.)
-    # bleu5 = corpus_bleu(list_of_references, hypotheses, weights)
-
     with open('references.pickle', 'wb') as f1:
         pickle.dump(references, f1, protocol=pickle.HIGHEST_PROTOCOL)
 
     with open('hypotheses.pickle', 'wb') as f2:
         pickle.dump(hypotheses, f2, protocol=pickle.HIGHEST_PROTOCOL)
 
-
-    # meteor = round(meteor_score(references, hypotheses),4)
-    # print("meteor: ", meteor)
-
-    # weights = (1./2., 1./2.)
-    # bleu2 = corpus_bleu(references, hypotheses, weights)
-    # print("BLEU-2: ", bleu2)
-    
-    # weights = (1./3., 1./3., 1./3.)
-    # bleu3 = corpus_bleu(references, hypotheses, weights)
-    # print("BLEU-3: ", bleu3)    
-
-    # weights = (1./5., 1./5., 1./5., 1./5., 1./5.)
-    # bleu5 = corpus_bleu(references, hypotheses, weights)
-    # print("BLEU-5: ", bleu5)
 
     return bleu4
 
