@@ -118,7 +118,7 @@ def main():
         # Decay learning rate if there is no improvement for 8 consecutive epochs, and terminate training after 20
         if epochs_since_improvement == 20:
             break
-        if epochs_since_improvement > 0 and epochs_since_improvement % 8 == 0:
+        if epochs_since_improvement > 0 and epochs_since_improvement % 2 == 0:
             adjust_learning_rate(decoder_optimizer, 0.8)
             if fine_tune_encoder:
                 adjust_learning_rate(encoder_optimizer, 0.8)
@@ -126,13 +126,13 @@ def main():
         if best_bleu4 >= 23:
             break
         # One epoch's training
-        # train(train_loader=train_loader,
-        #       encoder=encoder,
-        #       decoder=decoder,
-        #       criterion=criterion,
-        #       encoder_optimizer=encoder_optimizer,
-        #       decoder_optimizer=decoder_optimizer,
-        #       epoch=epoch)
+        train(train_loader=train_loader,
+              encoder=encoder,
+              decoder=decoder,
+              criterion=criterion,
+              encoder_optimizer=encoder_optimizer,
+              decoder_optimizer=decoder_optimizer,
+              epoch=epoch)
 
         # One epoch's validation
         recent_bleu4 = validate(val_loader=val_loader,
@@ -370,7 +370,7 @@ def validate(val_loader, encoder, decoder, criterion):
                 top5=top5accs,
                 bleu=bleu4))
         with open("bleu.txt", "a") as file:
-            file.write("bleu4: {0}".format(bleu4))
+            file.write("bleu4: {0}\n".format(bleu4))
 
     return bleu4
 
