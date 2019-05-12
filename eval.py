@@ -17,8 +17,9 @@ warnings.filterwarnings("ignore")
 data_folder = "datasets_coco" # folder with data files saved by create_input_files.py
 data_name = 'coco_5_cap_per_img_5_min_word_freq'  # base name shared by data files
 
-checkpoint = 'BEST_checkpoint_coco_5_cap_per_img_5_min_word_freq.pth.tar'  # model checkpoint
+# checkpoint = 'BEST_checkpoint_coco_5_cap_per_img_5_min_word_freq.pth.tar'  # model checkpoint
 # word map, ensure it's the same the data was encoded with and the model was trained with
+checkpoint = "squeezenet.pth.tar"
 word_map_file = 'WORDMAP_coco_5_cap_per_img_5_min_word_freq.json'
 
 # data_folder = 'datasets_8k'
@@ -60,7 +61,7 @@ def evaluate(beam_size):
     # DataLoader
     loader = torch.utils.data.DataLoader(
         CaptionDataset(data_folder, data_name, 'TEST', transform=transforms.Compose([normalize])),
-        batch_size=1, shuffle=True, num_workers=4, pin_memory=True)
+        batch_size=1, shuffle=True, num_workers=1, pin_memory=True)
 
     # TODO: Batched Beam Search
     # Therefore, do not use a batch_size greater than 1 - IMPORTANT!
