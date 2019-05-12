@@ -34,3 +34,5 @@ Beam search =5
 sampling speed, it means how many images per second  
 beam size = 1,2,3,4,5  
 19.73it/s, 16.02it/s, 14.81it/s, 13.85it, 12.39it/s
+
+Download [pretrained models](https://drive.google.com/drive/folders/12ndT_fOsoXrtPQnkXADNNSiG_ziYVQm0?usp=sharing)
