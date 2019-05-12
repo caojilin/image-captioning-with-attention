@@ -1,6 +1,6 @@
 Prepare Data:  
 Download COCO, Flickr8K, or Flickr30k datasets  
-Download ![Andrej Karpathy's training, validation, and test splits](http://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip)  
+Download [Andrej Karpathy's training, validation, and test splits](http://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip)  
 Then run   
 `python create_input_files.py`
 
@@ -15,6 +15,6 @@ To caption a image:
 To evaluate:  
 `python eval.py --image_folder="data/val2014"`  
 This will generate all captions for all images in a given folder  
-The output is references.pickle and hypotheses.pickle  
+The output is **references.pickle** and **hypotheses.pickle**   
 You'll use these two files and `nlg-eval.py` to calculate metrics such as bleu-1 to bleu-4, meteor, rogue, etc  
 `python nlg-eval.py`
