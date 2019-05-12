@@ -18,3 +18,13 @@ This will generate all captions for all images in a given folder
 The output is **references.pickle** and **hypotheses.pickle**   
 You'll use these two files and `nlg-eval.py` to calculate metrics such as bleu-1 to bleu-4, meteor, rogue, etc  
 `python nlg-eval.py`
+
+Given the time permitted, this is the best   
+Bleu_1: 0.647171  
+Bleu_2: 0.470034  
+Bleu_3: 0.330776  
+Bleu_4: 0.227324  
+METEOR: 0.187259  
+ROUGE_L: 0.473639  
+CIDEr: 0.571941  
+Beam Search = 5  
