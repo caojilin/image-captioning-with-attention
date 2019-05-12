@@ -9,4 +9,4 @@ Beam search =5
 
 sampling speed
 beam size = 1,2,3,4,5
-19.73it/s, 15.77it/s, 13.88it/s, 13.85it, 12.39it/s
+19.73it/s, 16.02it/s, 14.81it/s, 13.85it, 12.39it/s
