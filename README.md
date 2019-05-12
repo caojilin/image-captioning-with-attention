@@ -1,5 +1,5 @@
 Prepare Data:  
-Download COCO, Flickr8K, or Flickr30k datasets  
+Download COCO(I used 2014), Flickr8K, or Flickr30k datasets  
 Download [Andrej Karpathy's training, validation, and test splits](http://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip)  
 Then run   
 `python create_input_files.py`
