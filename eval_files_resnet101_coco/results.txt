@@ -6,3 +6,7 @@ METEOR: 0.260003
 ROUGE_L: 0.545065
 CIDEr: 1.041811
 Beam search =5
+
+sampling speed
+beam size = 1,2,3,4,5
+19.73it/s, 15.77it/s, 13.88it/s, 13.85it, 12.39it/s

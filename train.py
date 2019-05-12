@@ -333,7 +333,7 @@ def validate(val_loader, encoder, decoder, criterion):
                 the_file.write('Validation: [{0}/{1}]\t'
                                'Batch Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                                'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-                               'Top-5 Accuracy {top5.val:.3f} ({top5.avg:.3f})\n'.format(i, len(val_loader),
+                               'Top-5 Accuracy {top5.val:.3f} ({top5.avg:.3f})\t\n'.format(i, len(val_loader),
                                                                                          batch_time=batch_time,
                                                                                          loss=losses, top5=top5accs))
 
