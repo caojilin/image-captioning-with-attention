@@ -1,0 +1,37 @@
+
+May 9, 2019 at 9:27:25 AM UTC-7 (36 hours)
+almost run 36 hours
+
+bleu4: 0.17124989795494927
+bleu4: 0.1797199487606198
+bleu4: 0.18251847155360676
+bleu4: 0.18383756498653794
+bleu4: 0.1850091504095897
+bleu4: 0.18756577734757407
+bleu4: 0.18816972985203154
+bleu4: 0.18999219310543183
+bleu4: 0.1883285311919409
+bleu4: 0.1928806507719384
+bleu4: 0.19086249757014845
+bleu4: 0.19092520584964928
+bleu4: 0.192760756020875
+
+bleu4 converges to 19, so stopped training
+
+BLEU-4 score @ beam size of 5 is 0.2221.
+
+Beam search =5
+smaller beam size will increase the sample / sec, using beam size 1 to
+determine the speed of generating new captions
+
+sampling speed
+beam size = 1,2,3,4,5
+39.58it/s, 28.70it/s, 26.29it/s, 24.67it/s, 22.56it/s
+
+Bleu_1: 0.608945
+Bleu_2: 0.427987
+Bleu_3: 0.303710
+Bleu_4: 0.222065
+METEOR: 0.191570
+ROUGE_L: 0.453624
+CIDEr: 0.600619
