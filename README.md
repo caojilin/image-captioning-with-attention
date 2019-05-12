@@ -20,11 +20,15 @@ You'll use these two files and `nlg-eval.py` to calculate metrics such as bleu-1
 `python nlg-eval.py`
 
 Given the time permitted, this is the best   
-Bleu_1: 0.647171  
-Bleu_2: 0.470034  
-Bleu_3: 0.330776  
-Bleu_4: 0.227324  
-METEOR: 0.187259  
-ROUGE_L: 0.473639  
-CIDEr: 0.571941  
-Beam Search = 5  
+Bleu_1: 0.732558  
+Bleu_2: 0.566442  
+Bleu_3: 0.433188  
+Bleu_4: 0.332858  
+METEOR: 0.260003  
+ROUGE_L: 0.545065  
+CIDEr: 1.041811  
+Beam search =5  
+
+sampling speed, it means how many images per second  
+beam size = 1,2,3,4,5  
+19.73it/s, 16.02it/s, 14.81it/s, 13.85it, 12.39it/s
