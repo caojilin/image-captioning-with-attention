@@ -12,6 +12,8 @@ The default is resnet101
 To caption a image:  
 `python caption.py --img="img/1.jpg" --model=Best_squeezeNet.pth.tar`
 
+demo video : [demo video](https://www.youtube.com/watch?v=EldYl3xzvqk&feature=youtu.be) 
+
 To evaluate:  
 `python eval.py --image_folder="data/val2014"`  
 This will generate all captions for all images in a given folder  
