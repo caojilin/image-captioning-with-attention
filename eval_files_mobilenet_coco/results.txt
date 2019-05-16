@@ -1,0 +1,3 @@
+encoder and decoder the number of parameters
+3206976
+16288531
