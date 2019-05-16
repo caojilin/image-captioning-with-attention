@@ -1,10 +1,12 @@
 import torch
 from torch import nn
 import torchvision
+import mobileNet
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 x = torch.rand(1, 3, 256, 256)
+
 
 
 class Encoder(nn.Module):
@@ -19,7 +21,10 @@ class Encoder(nn.Module):
         resnet = torchvision.models.resnet101(pretrained=True)  # pretrained ImageNet ResNet-101
         vgg16 = torchvision.models.vgg16_bn(pretrained=True)
         squeezenet = torchvision.models.squeezenet1_1(pretrained=True)
+        mobNet = mobileNet.mobileNet()
 
+        # the idea is we don't want original model's last layer. We drop it and replace it with
+        # our
         if model_name == "resnet":
             # Remove linear and pool layers (since we're not doing classification)
             modules = list(resnet.children())[:-2]
@@ -32,7 +37,11 @@ class Encoder(nn.Module):
             modules = list(vgg16.children())
             modules = modules[:-2]
             self.resnet = nn.Sequential(*modules)
-
+        elif model_name == "mobileNet":
+            modules = list(mobNet.children())
+            # after dropping the last layer, we get torch.Size([1, 1024, 8, 8])
+            modules = modules[-2][:-1]
+            self.resnet = nn.Sequential(*modules)
         # Resize image to fixed size to allow input images of variable size
         self.adaptive_pool = nn.AdaptiveAvgPool2d((encoded_image_size, encoded_image_size))
 
@@ -65,7 +74,9 @@ class Encoder(nn.Module):
 # encoder1 = Encoder(model_name="vgg")
 # encoder2 = Encoder(model_name="resnet")
 # encoder3 = Encoder(model_name="squeezenet")
+# encoder4 = Encoder(model_name="mobileNet")
 
+mod = mobileNet.mobileNet()
 
 class Attention(nn.Module):
     """
