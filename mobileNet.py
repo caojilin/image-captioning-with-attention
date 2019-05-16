@@ -1,8 +1,10 @@
 from torch import nn
 
-class mobileNet(nn.Module):
+#implementation and model weights: https://github.com/marvis/pytorch-mobilenet
+
+class MobileNet(nn.Module):
     def __init__(self):
-        super(mobileNet, self).__init__()
+        super(MobileNet, self).__init__()
 
         def conv_bn(inp, oup, stride):
             return nn.Sequential(

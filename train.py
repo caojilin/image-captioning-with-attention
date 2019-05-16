@@ -60,14 +60,22 @@ def main():
 
     # Initialize / load checkpoint
     if checkpoint is None:
+        # resnet
+        # encoder = Encoder(model_name="resnet")
+        # encoder_dim = 2048
 
-        # encoder = Encoder()
-        # squeezenet?
+        # squeezenet
         # encoder = Encoder(model_name="squeezenet")
         # encoder_dim = 1000
+
         # vgg
-        encoder = Encoder(model_name="vgg")
-        encoder_dim = 512
+        # encoder = Encoder(model_name="vgg")
+        # encoder_dim = 512
+
+        # mobileNet
+        encoder = Encoder(model_name="mobileNet")
+        encoder_dim = 1024
+
         encoder.fine_tune(fine_tune_encoder)
         encoder_optimizer = torch.optim.Adam(params=filter(lambda p: p.requires_grad, encoder.parameters()),
                                              lr=encoder_lr) if fine_tune_encoder else None
@@ -126,6 +134,10 @@ def main():
         # start fine-tuning after bleu4 reaches 23, so break this loop
         if best_bleu4 >= 23:
             break
+
+        count_parameters(encoder)
+        count_parameters(decoder)
+
         # One epoch's training
         train(train_loader=train_loader,
               encoder=encoder,
@@ -134,6 +146,8 @@ def main():
               encoder_optimizer=encoder_optimizer,
               decoder_optimizer=decoder_optimizer,
               epoch=epoch)
+
+
 
         # One epoch's validation
         recent_bleu4 = validate(val_loader=val_loader,

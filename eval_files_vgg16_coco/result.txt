@@ -8,3 +8,6 @@ Bleu_4: 0.323563
 METEOR: 0.251789
 ROUGE_L: 0.534920
 CIDEr: 0.983982
+
+the number of parameters
+14723136

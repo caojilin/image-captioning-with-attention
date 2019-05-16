@@ -7,8 +7,6 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 x = torch.rand(1, 3, 256, 256)
 
-
-
 class Encoder(nn.Module):
     """
     Encoder.
@@ -18,13 +16,24 @@ class Encoder(nn.Module):
         super(Encoder, self).__init__()
         self.enc_image_size = encoded_image_size
 
-        resnet = torchvision.models.resnet101(pretrained=True)  # pretrained ImageNet ResNet-101
-        vgg16 = torchvision.models.vgg16_bn(pretrained=True)
-        squeezenet = torchvision.models.squeezenet1_1(pretrained=True)
-        mobNet = mobileNet.mobileNet()
+        resnet = torchvision.models.resnet101(pretrained=False)  # pretrained ImageNet ResNet-101
+        vgg16 = torchvision.models.vgg16_bn(pretrained=False)
+        squeezenet = torchvision.models.squeezenet1_1(pretrained=False)
+        mobNet = mobileNet.MobileNet()
 
-        # the idea is we don't want original model's last layer. We drop it and replace it with
-        # our
+        # ignore this part. It's just for loading a pretrained mobileNet
+        tar = torch.load('mobilenet_sgd_rmsprop_69.526.tar',map_location='cpu')
+        state_dict = tar['state_dict']
+        from collections import OrderedDict
+        new_state_dict = OrderedDict()
+        for k, v in state_dict.items():
+            name = k[7:]  # remove `module.`
+            new_state_dict[name] = v
+        mobNet.load_state_dict(new_state_dict)
+
+        # the idea is that we don't want the original model's last layer.
+        # So we drop it and replace it with our design
+        # Different model have different architectures, the ways of dropping last layer may vary.
         if model_name == "resnet":
             # Remove linear and pool layers (since we're not doing classification)
             modules = list(resnet.children())[:-2]
@@ -42,6 +51,7 @@ class Encoder(nn.Module):
             # after dropping the last layer, we get torch.Size([1, 1024, 8, 8])
             modules = modules[-2][:-1]
             self.resnet = nn.Sequential(*modules)
+
         # Resize image to fixed size to allow input images of variable size
         self.adaptive_pool = nn.AdaptiveAvgPool2d((encoded_image_size, encoded_image_size))
 
@@ -75,8 +85,6 @@ class Encoder(nn.Module):
 # encoder2 = Encoder(model_name="resnet")
 # encoder3 = Encoder(model_name="squeezenet")
 # encoder4 = Encoder(model_name="mobileNet")
-
-mod = mobileNet.mobileNet()
 
 class Attention(nn.Module):
     """
