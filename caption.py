@@ -11,8 +11,10 @@ from scipy.misc import imread, imresize
 from PIL import Image
 
 import warnings
+
 warnings.filterwarnings("ignore")
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=3):
@@ -42,7 +44,7 @@ def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
     transform = transforms.Compose([normalize])
-    image = transform(img).to(device)  # (3, 256, 256)
+    image = transform(img)  # (3, 256, 256)
 
     # Encode
     image = image.unsqueeze(0)  # (1, 3, 256, 256)
@@ -149,7 +151,7 @@ def caption_image_beam_search(encoder, decoder, image_path, word_map, beam_size=
     return seq, alphas
 
 
-def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True):
+def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True, attention=False):
     """
     Visualizes caption with weights at every word.
 
@@ -166,24 +168,29 @@ def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True):
 
     words = [rev_word_map[ind] for ind in seq]
 
-    for t in range(len(words)):
-        if t > 50:
-            break
-        plt.subplot(np.ceil(len(words) / 5.), 5, t + 1)
-
-        plt.text(0, 1, '%s' % (words[t]), color='black', backgroundcolor='white', fontsize=12)
+    if not attention:
+        plt.text(0, 1, '%s' % (" ".join(words[1:-1])), color='black', backgroundcolor='white', fontsize=12)
         plt.imshow(image)
-        current_alpha = alphas[t, :]
-        if smooth:
-            alpha = skimage.transform.pyramid_expand(current_alpha.numpy(), upscale=24, sigma=8)
-        else:
-            alpha = skimage.transform.resize(current_alpha.numpy(), [14 * 24, 14 * 24])
-        if t == 0:
-            plt.imshow(alpha, alpha=0)
-        else:
-            plt.imshow(alpha, alpha=0.8)
-        plt.set_cmap(cm.Greys_r)
-        plt.axis('off')
+    else:
+        for t in range(len(words)):
+            if t > 50:
+                break
+            plt.subplot(np.ceil(len(words) / 5.), 5, t + 1)
+
+            plt.text(0, 1, '%s' % (words[t]), color='black', backgroundcolor='white', fontsize=12)
+            plt.imshow(image)
+            current_alpha = alphas[t, :]
+            if smooth:
+                alpha = skimage.transform.pyramid_expand(current_alpha.numpy(), upscale=24, sigma=8)
+            else:
+                alpha = skimage.transform.resize(current_alpha.numpy(), [14 * 24, 14 * 24])
+            if t == 0:
+                plt.imshow(alpha, alpha=0)
+            else:
+                plt.imshow(alpha, alpha=0.8)
+            plt.set_cmap(cm.Greys_r)
+
+    plt.axis('off')
     plt.show()
 
 
@@ -191,17 +198,16 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Show, Attend, and Tell - Tutorial - Generate Caption')
 
     parser.add_argument('--img', '-i', help='path to image')
-    parser.add_argument('--model', '-m', help='path to model')
-    parser.add_argument('--word_map', '-wm', help='path to word map JSON')
+    parser.add_argument('--model', '-m', default="Best_resnet101.pth.tar", help='path to model')
+    parser.add_argument('--word_map', '-wm', default="WORDMAP_coco_5_cap_per_img_5_min_word_freq.json",
+                        help='path to word map JSON')
     parser.add_argument('--beam_size', '-b', default=5, type=int, help='beam size for beam search')
     parser.add_argument('--dont_smooth', dest='smooth', action='store_false', help='do not smooth alpha overlay')
+    parser.add_argument('--attention', '-a', default=False, type=bool, help='draw attention, True or False\t'
+                                                                            'the default is False')
 
     args = parser.parse_args()
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # args.model = "BEST_checkpoint_flickr8k_5_cap_per_img_5_min_word_freq.pth.tar"
-    # args.word_map = "WORDMAP_flickr8k_5_cap_per_img_5_min_word_freq.json"
-    # args.img = "img/1.jpg"
     # Load model
     checkpoint = torch.load(args.model, map_location='cpu')
     decoder = checkpoint['decoder']
@@ -221,4 +227,4 @@ if __name__ == '__main__':
     alphas = torch.FloatTensor(alphas)
 
     # Visualize caption and attention of best sequence
-    visualize_att(args.img, seq, alphas, rev_word_map, args.smooth)
+    visualize_att(args.img, seq, alphas, rev_word_map, args.smooth, args.attention)
