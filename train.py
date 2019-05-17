@@ -69,12 +69,12 @@ def main():
         # encoder_dim = 1000
 
         # vgg
-        # encoder = Encoder(model_name="vgg")
-        # encoder_dim = 512
+        encoder = Encoder(model_name="vgg")
+        encoder_dim = 512
 
-        # mobileNet
-        encoder = Encoder(model_name="mobileNet")
-        encoder_dim = 1024
+        # # mobileNet
+        # encoder = Encoder(model_name="mobileNet")
+        # encoder_dim = 1024
 
         encoder.fine_tune(fine_tune_encoder)
         encoder_optimizer = torch.optim.Adam(params=filter(lambda p: p.requires_grad, encoder.parameters()),
