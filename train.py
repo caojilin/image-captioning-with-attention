@@ -61,12 +61,12 @@ def main():
     # Initialize / load checkpoint
     if checkpoint is None:
         # resnet
-        # encoder = Encoder(model_name="resnet")
-        # encoder_dim = 2048
+        encoder = Encoder(model_name="resnet")
+        encoder_dim = 2048
 
         # squeezenet
-        encoder = Encoder(model_name="squeezenet")
-        encoder_dim = 1000
+        # encoder = Encoder(model_name="squeezenet")
+        # encoder_dim = 1000
 
         # vgg
         # encoder = Encoder(model_name="vgg")

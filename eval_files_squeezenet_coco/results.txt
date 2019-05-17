@@ -39,3 +39,7 @@ beam size = 5
 
 model size
 200M
+
+# of parameters in encoder and decoder
+1235496
+16190203
