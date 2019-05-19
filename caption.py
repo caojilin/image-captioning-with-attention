@@ -197,7 +197,7 @@ def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True, attention=
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Show, Attend, and Tell - Tutorial - Generate Caption')
 
-    parser.add_argument('--img', '-i', default="img/5.jpg", help='path to image')
+    parser.add_argument('--img', '-i', default="img/1.jpg", help='path to image')
     parser.add_argument('--model', '-m', default="Best_resnet101.pth.tar", help='path to model')
     parser.add_argument('--word_map', '-wm', default="WORDMAP_coco_5_cap_per_img_5_min_word_freq.json",
                         help='path to word map JSON')

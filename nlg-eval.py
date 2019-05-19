@@ -9,24 +9,8 @@ with open('hypotheses.pickle', 'rb') as f2:
     hypotheses = pickle.load(f2)
 
 
-
-# a = references[0:5]
-# b = hypotheses[0:5]
 a = references
 b = hypotheses
-
-
-
-# with open('ref1.txt', 'a') as the_file:
-#     the_file.write('Hello\n')
-# with open('ref2.txt', 'a') as the_file:
-#     the_file.write('Hello\n')
-# with open('ref3.txt', 'a') as the_file:
-#     the_file.write('Hello\n')
-# with open('ref4.txt', 'a') as the_file:
-#     the_file.write('Hello\n')
-# with open('ref5.txt', 'a') as the_file:
-#     the_file.write('Hello\n')
 
 
 # word_map_file = "WORDMAP_flickr8k_5_cap_per_img_5_min_word_freq.json"
