@@ -171,6 +171,8 @@ def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True, attention=
     if not attention:
         plt.text(0, 1, '%s' % (" ".join(words[1:-1])), color='black', backgroundcolor='white', fontsize=12)
         plt.imshow(image)
+        plt.axis('off')
+
     else:
         for t in range(len(words)):
             if t > 50:
@@ -189,8 +191,8 @@ def visualize_att(image_path, seq, alphas, rev_word_map, smooth=True, attention=
             else:
                 plt.imshow(alpha, alpha=0.8)
             plt.set_cmap(cm.Greys_r)
+            plt.axis('off')
 
-    plt.axis('off')
     plt.show()
 
 

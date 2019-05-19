@@ -11,11 +11,16 @@ The default is resnet101
 `python train.py`
 
 To caption a image:  
-`python caption.py --img="img/1.jpg" --model=Best_squeezeNet.pth.tar`
+`python caption.py --img="img/1.jpg"` or  
+
 
 demo caption :
-![demo video](img/caption_demo.png) 
+![demo video](img/caption_demo.png)   
 
+demo caption with attention turned on:  
+`python caption.py --img="img/1.jpg -attention True"`
+
+![attention](img/caption_demo_attention.png)
 
 To evaluate:  
 `python eval.py --image_folder="data/val2014"`  
