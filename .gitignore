@@ -6,3 +6,6 @@
 !**.py
 !.gitignore
 !**.md
+!**.tex
+!**.sty
+!**.pdf
